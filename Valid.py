@@ -20,6 +20,6 @@ def isValidTransitionMatrix(matrix):
 		if rowSum[idx] != 1:
 			print("Sum of row ", idx+1, " is ", rowSum[idx])
 			print("Row ", idx+1, " is invalid")
-			return 0
+			return False
 
-	return 1
+	return True

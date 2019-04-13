@@ -1,7 +1,7 @@
 from ReadMatrix import readTransitionMatrix
-from nth_stepProbabilities import nth_step_states
+from nthStepProb import nthStepStates
 
 matrix = readTransitionMatrix()
 print(matrix)
 
-nth_step_states(matrix)
+nthStepStates(matrix)

@@ -1,7 +1,7 @@
 from numpy.linalg import matrix_power
 import numpy as np
 
-def nth_step_states(matrix):
+def nthStepStates(matrix):
 	
 	state = int(input("Enter the starting state (0 indexed): "))
 	if state >= matrix.shape[0] or state < 0:
