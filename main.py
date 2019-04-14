@@ -5,6 +5,7 @@ from findCB import findCB
 from stationaryDist import mergeCB
 from ExpectedNumVisits import expectedNumVisits
 from CanonicalForm import getCanonical
+from HittingProbs import hittingProbs
 
 matrix = readTransitionMatrix()
 print(matrix)
@@ -17,7 +18,8 @@ mergedMatrix = mergeCB(matrix, cb, residual)
 print("Merged Matrix :")
 print(mergedMatrix)
 
-standard, Q = getCanonical(mergedMatrix)
+standard, Q, R = getCanonical(mergedMatrix)
 print("Standard Transition Matrix")
 print(standard)
 expectedNumVisits(Q)
+hittingProbs(Q, R)
