@@ -1,7 +1,5 @@
 from Valid import isValidTransitionMatrix
-
 import pandas as pd
-
 
 def readTransitionMatrix():
 	try:
