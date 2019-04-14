@@ -21,7 +21,7 @@ class Graph:
 		startOrd.append(v)
 		for u in self.graph[v]:
 			if not visited[u]:
-				self.DFS(u, visited)
+				self.DFS(u, visited, startOrd, finOrd)
 		finOrd.append(v)
 
 	def getTranspose(self):
@@ -48,7 +48,7 @@ class Graph:
 			v = finOrd.pop()
 			if not visited[v]:
 				startOrd = []
-				gr.DFS(v, visited, startOrd, [])
+				graphT.DFS(v, visited, startOrd, [])
 				sccRevMap[startOrd] = len(scc)
 				scc.append(startOrd)
 
