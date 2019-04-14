@@ -1,7 +1,9 @@
 import numpy as np
 
 def expectedNumVisits(Q_matrix):
-	Q_matrix = np.array([[0,.5,0], [.5 ,0 ,.5], [0 ,.5 ,0]])
+	print("*-"*42)
+	print("To calculate Expected Number of Visits to transient states before getting absorbed.")
+	print("*-"*42)
 
 	I = np.identity(Q_matrix.shape[0], dtype = float)
 	N = np.linalg.inv(I-Q_matrix)
