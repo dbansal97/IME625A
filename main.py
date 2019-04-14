@@ -1,6 +1,7 @@
 from ReadMatrix import readTransitionMatrix
 from nthStepProb import nthStepStates
 from Graph import Graph
+from ExpectedNumVisits import expectedNumVisits
 
 matrix = readTransitionMatrix()
 print(matrix)
@@ -17,3 +18,5 @@ for idx, block in enumerate(cb):
 	for state in block:
 		print(state, end=" ")
 	print("")
+
+expectedNumVisits(matrix)
