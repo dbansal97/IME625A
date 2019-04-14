@@ -2,6 +2,7 @@ from ReadMatrix import readTransitionMatrix
 from nthStepProb import nthStepStates
 from Graph import Graph
 from ExpectedNumVisits import expectedNumVisits
+from CanonicalForm import getCanonical
 
 matrix = readTransitionMatrix()
 print(matrix)
@@ -19,4 +20,7 @@ for idx, block in enumerate(cb):
 		print(state, end=" ")
 	print("")
 
-expectedNumVisits(matrix)
+standard, Q = getCanonical(matrix)
+print("Standard Transition Matrix")
+print(standard)
+expectedNumVisits(Q)

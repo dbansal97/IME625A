@@ -2,7 +2,10 @@ from numpy.linalg import matrix_power
 import numpy as np
 
 def nthStepStates(matrix):
-	
+	print("*-"*37)
+	print("To calculate probabilities after certain steps starting from given state.")
+	print("*-"*37)
+
 	state = int(input("Enter the starting state (0 indexed): "))
 	if state >= matrix.shape[0] or state < 0:
 		print("You should've entered a valid state. Bye!!")
