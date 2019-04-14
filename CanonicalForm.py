@@ -26,10 +26,14 @@ def getStandard(matrix, absorb, trans):
 def getQ(matrix, absorb, trans):
     return (matrix[np.ix_(trans, trans)])
 
+def getR(matrix, absorb, trans):
+    return (matrix[np.ix_(trans, absorb)])
+
 def getCanonical(matrix):
     absorb, trans = getStates(matrix)
     print("Absorbing States : ", absorb)
     print("Transient States : ", trans)
     standard = getStandard(matrix, absorb, trans)
     Q = getQ(matrix, absorb, trans)
-    return standard, Q
+    R = getR(matrix, absorb, trans)
+    return standard, Q, R

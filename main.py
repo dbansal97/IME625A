@@ -3,6 +3,7 @@ from nthStepProb import nthStepStates
 from Graph import Graph
 from ExpectedNumVisits import expectedNumVisits
 from CanonicalForm import getCanonical
+from HittingProbs import hittingProbs
 
 matrix = readTransitionMatrix()
 print(matrix)
@@ -20,7 +21,8 @@ for idx, block in enumerate(cb):
 		print(state, end=" ")
 	print("")
 
-standard, Q = getCanonical(matrix)
+standard, Q, R = getCanonical(matrix)
 print("Standard Transition Matrix")
 print(standard)
 expectedNumVisits(Q)
+hittingProbs(Q, R)
