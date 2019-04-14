@@ -2,6 +2,7 @@ from ReadMatrix import readTransitionMatrix
 from nthStepProb import nthStepStates
 # from Graph import Graph
 from findCB import findCB
+from stationaryDist import mergeCB
 from ExpectedNumVisits import expectedNumVisits
 from CanonicalForm import getCanonical
 
@@ -10,9 +11,13 @@ print(matrix)
 
 nthStepStates(matrix)
 
-findCB(matrix)
+cb, residual = findCB(matrix)
 
-standard, Q = getCanonical(matrix)
+mergedMatrix = mergeCB(matrix, cb, residual)
+print("Merged Matrix :")
+print(mergedMatrix)
+
+standard, Q = getCanonical(mergedMatrix)
 print("Standard Transition Matrix")
 print(standard)
 expectedNumVisits(Q)
