@@ -4,10 +4,10 @@ import numpy as np
 class Graph:
 	def __init__(self, nVert):
 		self.V = nVert
-		self.graph = defaultdict(list)
+		self.adjList = defaultdict(list)
 
 	def connect(self, u, v):
-		self.graph[u].append(v)
+		self.adjList[u].append(v)
 
 	def adjMatToAdjList(self, mat):
 		self.V = len(mat)
@@ -19,15 +19,15 @@ class Graph:
 	def DFS(self, v, visited, startOrd, finOrd):
 		visited[v] = True
 		startOrd.append(v)
-		for u in self.graph[v]:
+		for u in self.adjList[v]:
 			if not visited[u]:
 				self.DFS(u, visited, startOrd, finOrd)
 		finOrd.append(v)
 
 	def getTranspose(self):
 		newGraph = Graph(self.V)
-		for u in self.graph:
-			for v in self.graph[u]:
+		for u in self.adjList:
+			for v in self.adjList[u]:
 				newGraph.connect(v, u)
 		return newGraph
 
@@ -52,4 +52,15 @@ class Graph:
 				sccRevMap[startOrd] = len(scc)
 				scc.append(startOrd)
 
-		return np.asarray(scc), sccRevMap
+		scc = np.sort(np.asarray(scc))
+		
+		return scc, sccRevMap
+
+	def printSCC(self):
+		cb, _ = self.findSCC()
+		print("These are the communicating blocks :")
+		for idx, block in enumerate(cb):
+			print("CB", idx+1, ":", end=" ")
+			for state in block:
+				print(state, end=" ")
+			print("")
