@@ -1,16 +1,19 @@
-from ReadMatrix import readTransitionMatrix
+from ReadMatrix import readSpecs
 from nthStepProb import nthStepStates
-# from Graph import Graph
 from findCB import findCB
-from stationaryDist import mergeCB
+from mergeCB import mergeCB
+from stationaryDist import findStationaryDistOverAll
 from ExpectedNumVisits import expectedNumVisits
 from CanonicalForm import getCanonical
 from HittingProbs import hittingProbs
 
-matrix = readTransitionMatrix()
+matrix, startDist = readSpecs()
+print("Input Transition Matrix :")
 print(matrix)
+print("Input Starting Distribution :")
+print(startDist)
 
-nthStepStates(matrix)
+# nthStepStates(matrix)
 
 cb, residual = findCB(matrix)
 
@@ -18,8 +21,15 @@ mergedMatrix = mergeCB(matrix, cb, residual)
 print("Merged Matrix :")
 print(mergedMatrix)
 
-standard, Q, R = getCanonical(mergedMatrix)
-print("Standard Transition Matrix")
+standard, Q, R, states = getCanonical(mergedMatrix, cb, residual)
+print("Standard Transition Matrix :")
 print(standard)
-expectedNumVisits(Q)
-hittingProbs(Q, R)
+print("States :")
+print(states)
+
+expectedNumVisits(Q, states)
+hitProb = hittingProbs(Q, R, states)
+
+stationaryDist = findStationaryDistOverAll(matrix, startDist, states, hitProb)
+print("Stationary Distribution :")
+print(stationaryDist)

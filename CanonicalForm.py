@@ -29,11 +29,17 @@ def getQ(matrix, absorb, trans):
 def getR(matrix, absorb, trans):
     return (matrix[np.ix_(trans, absorb)])
 
-def getCanonical(matrix):
+def getCanonical(matrix, cb, residual):
     absorb, trans = getStates(matrix)
     print("Absorbing States : ", absorb)
     print("Transient States : ", trans)
     standard = getStandard(matrix, absorb, trans)
     Q = getQ(matrix, absorb, trans)
     R = getR(matrix, absorb, trans)
-    return standard, Q, R
+
+    states = []
+    for state in residual:
+        states.append([state])
+    states.extend(cb)
+
+    return standard, Q, R, states

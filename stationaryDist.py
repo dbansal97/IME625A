@@ -1,6 +1,6 @@
 import numpy as np
 
-def findStationaryDist(matrix):
+def findStationaryDistCB(matrix):
 	# Solve (A^T - I) X  = 0 where X is the stationary distribution
 	# along with the equation x + y = 1
 	# A is the transition matrix of finite irreducible Markov Chain
@@ -13,21 +13,19 @@ def findStationaryDist(matrix):
 
 	return X
 
-def extractTransition(matrix, states):
-	return matrix[np.ix_(states, states)]
+def findStationaryDistOverAll(matrix, startDist, states, hitProb):
+	mergedStartDist = np.zeros(len(states))
+	for idx, state in enumerate(states):
+		mergedStartDist[idx] = startDist[state].sum()
 
-def mergeCB(matrix, cb, residual):
-	nMerged = len(cb) + len(residual)
-	mergedMatrix = np.zeros((nMerged, nMerged))
+	mergedStationary = np.matmul(mergedStartDist, hitProb)
 
-	for idx in range(len(cb)):
-		mergedMatrix[idx, idx] = 1
+	stationaryDist = np.zeros(len(startDist))
+	for idx, state in enumerate(states):
+		if mergedStationary[idx] == 0:
+			continue
 
-	idxRes = list(range(len(cb), nMerged))
-	mergedMatrix[np.ix_(idxRes, idxRes)] = matrix[np.ix_(residual, residual)]
+		stDist = findStationaryDistCB(matrix[np.ix_(state, state)])
+		stationaryDist[state] = mergedStationary[idx] * stDist
 
-	for i, state in enumerate(residual):
-		for j, block in enumerate(cb):
-			mergedMatrix[i+len(cb), j] = np.sum(matrix[np.ix_([state], block)])
-
-	return mergedMatrix
+	return stationaryDist
