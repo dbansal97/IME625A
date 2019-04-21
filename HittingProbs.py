@@ -1,22 +1,23 @@
 import numpy as np
 
-def hittingProbs(Q_matrix, R_matrix, states, flag = 0):
-	if flag == 0:
-		print("*-"*55)
-		print("To calculate starting from certain transient state what is probability of getting absorbed in absorbing states.")
-		print("*-"*55)
+def hittingProbs(Q_matrix, R_matrix, states):
+	print("")
+	print("*-"*55)
+	print("To calculate starting from certain transient state what is probability of getting absorbed in absorbing states.")
+	print("*-"*55)
 
 	I = np.identity(Q_matrix.shape[0], dtype=float)
 	N = np.linalg.inv(I-Q_matrix)
 
 	B = np.matmul(N, R_matrix)
 	
-	if flag == 0:
-		state = int(input("Enter the starting state (0 indexed): "))
-		if state >= Q_matrix.shape[0] or state < 0:
-			print("You should've entered a valid state. Bye!!")
-			return -1
-		print("Starting from state", state, "prob. of absorption in different absorbing states is :")
+	# state = int(input("Enter the starting state (0 indexed): "))
+	# if state >= Q_matrix.shape[0] or state < 0:
+	# 	print("You should've entered a valid state. Bye!!")
+	# 	return -1
+
+	for state in range(B.shape[0]):
+		print("\nStarting from state", states[state], "prob. of absorption in different absorbing states is :")
 		for idx in range(B.shape[1]):
 			print("State", states[idx+Q_matrix.shape[1]], "absorption prob. =", B[state][idx])
 
