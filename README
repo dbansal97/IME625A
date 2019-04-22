@@ -1,3 +1,15 @@
 # Application of graph theory in Markov Chain
 
 This repository contains code for course project of IME625A.
+
+Run main.py for analyzing Finite State Markov chain.
+
+Input :
+Transition matrix : transition.txt
+Starting Distribution : start.txt
+
+Output :
+Communicating Blocks, Residual States, Standard/Canonical form of merged transition matrix, Expected number of visits before absorption, Hitting Probabilities, Stationary Distribution.
+
+
+Run python PageRank.py to find top 10 pages from hollins.dat. This is the basic implementation of PageRank algorithm which uses the functions designed above.
